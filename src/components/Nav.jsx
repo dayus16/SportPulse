@@ -1,6 +1,7 @@
 import React from "react";
 import { IoIosSearch, IoMdMenu, IoMdClose } from "react-icons/io";
-import Logo from "../Images/logo.png";
+import Logo from "../Images/logo001.jpg";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const [inputField, setInputField] = React.useState(false);
@@ -17,16 +18,30 @@ const Nav = () => {
       <div className="hidden md:block">
         <div className="flex justify-between items-center p-5 bg-white text-black shadow-lg">
           <div className="text-2xl font-bold flex items-center space-x-2">
-            <img src={Logo} alt="SportPulse Logo" className="w-10 h-10" />
+            <img
+              src={Logo}
+              alt="SportPulse Logo"
+              className="w-10 h-10 rounded-full"
+            />
             <h1>SportPulse</h1>
           </div>
           <div>
             <ul className="flex space-x-4 cursor-pointer">
-              <li className="hover:text-[#e93314]">Home</li>
-              <li className="hover:text-[#e93314]">About</li>
-              <li className="hover:text-[#e93314]">Contact</li>
-              <li className="hover:text-[#e93314]">Blog</li>
-              <li className="hover:text-[#e93314]">Privacy Policy</li>
+              <li className="hover:text-[#e93314]">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="hover:text-[#e93314]">
+                <Link to="/about">About</Link>
+              </li>
+              <li className="hover:text-[#e93314]">
+                <Link to="/contact">Contacts</Link>
+              </li>
+              <li className="hover:text-[#e93314]">
+                <Link to="/blog">Blog</Link>
+              </li>
+              <li className="hover:text-[#e93314]">
+                <Link to="/privacy">Privacy Policy</Link>
+              </li>
             </ul>
           </div>
           <div className="relative w-full max-w-xs">
@@ -82,11 +97,21 @@ const Nav = () => {
           {menuOpen && (
             <div className="flex flex-col items-center bg-white text-black shadow-lg p-5">
               <ul className="space-y-4 cursor-pointer">
-                <li className="hover:text-[#e93314]">Home</li>
-                <li className="hover:text-[#e93314]">About</li>
-                <li className="hover:text-[#e93314]">Contact</li>
-                <li className="hover:text-[#e93314]">Blog</li>
-                <li className="hover:text-[#e93314]">Privacy Policy</li>
+                <li className="hover:text-[#e93314]">
+                  <Link to="/">Home</Link>
+                </li>
+                <li className="hover:text-[#e93314]">
+                  <Link to="/about">About</Link>
+                </li>
+                <li className="hover:text-[#e93314]">
+                  <Link to="/contact">Contacts</Link>
+                </li>
+                <li className="hover:text-[#e93314]">
+                  <Link to="/blog">Blog</Link>
+                </li>
+                <li className="hover:text-[#e93314]">
+                  <Link to="/privacy">Privacy Policy</Link>
+                </li>
               </ul>
             </div>
           )}
