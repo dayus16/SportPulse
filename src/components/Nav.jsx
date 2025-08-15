@@ -59,7 +59,7 @@ const Nav = () => {
       </div>
 
       {/* -------------Mobile View----------------------- */}
-      <div className="md:hidden">
+      <div className="md:hidden z-50 ">
         <div className="flex justify-between items-center p-5">
           {!inputField && (
             <div className="text-2xl font-bold flex items-center space-x-2">

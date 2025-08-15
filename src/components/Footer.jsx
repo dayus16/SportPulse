@@ -1,8 +1,37 @@
-import React from "react";
+import { useState } from "react";
 import Logo from "../Images/logo001.jpg";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const validateEmail = (email) => {
+    // Basic email regex
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
+  const handleSendButton = async () => {
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      toast.success("Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      toast.error("Something went wrong. Try again.", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="mt-10 bg-gray-800 text-white">
       <div className="flex flex-col md:flex-row justify-around space-y-3 p-5">
@@ -16,10 +45,10 @@ const Footer = () => {
             <h1 className="text-2xl font-bold">SportPulse</h1>
           </div>
           <p className="text-sm text-gray-300 mt-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do{" "}
+            <br />
             eiusmod tempor incididunt ut labore et dolore magna aliqua. <br />
-            Eaque ipsa quae ab illo inventore veritatis et quasi
-            architecto.
+            Eaque ipsa quae ab illo inventore veritatis et quasi architecto.
           </p>
         </div>
 
@@ -41,18 +70,22 @@ const Footer = () => {
           </h1>
           <ul className="space-y-2">
             <li className="mt-3 text-gray-300 text-sm">
-              <Link>Home</Link>
+              <Link to="/">Home</Link>
             </li>
             <li className="text-gray-300 text-sm">
-              <Link>About</Link>
-            </li>
-            <li className="text-gray-300 text-sm">
-              {" "}
-              <Link>Contact</Link>
+              <Link to="/about">About</Link>
             </li>
             <li className="text-gray-300 text-sm">
               {" "}
-              <Link>Blog</Link>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li className="text-gray-300 text-sm">
+              {" "}
+              <Link to="/blog">Blog</Link>
+            </li>
+            <li className="text-gray-300 text-sm">
+              {" "}
+              <Link to="/privacy">Privacy Policy</Link>
             </li>
           </ul>
         </div>
@@ -66,18 +99,32 @@ const Footer = () => {
           </p>
           <div className="space-x-1">
             <input
-              type="text"
+              type="email"
               placeholder="Your Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
               className="mt-5 border border-gray-500 outline-none py-2 px-4 rounded bg-gray-600"
             />
-            <button className="bg-[#e93314] py-2 px-6 rounded cursor-pointer">
-              Send
+            <button
+              onClick={handleSendButton}
+              className="bg-[#e93314] py-2 px-6 w-20 rounded cursor-pointer"
+            >
+              {loading ? (
+                <div className="flex jusitify-center items-center">
+                  <ClipLoader color="fff" size={20} />
+                </div>
+              ) : (
+                "Send"
+              )}
             </button>
           </div>
         </div>
       </div>
       <div className="text-center border-t border-gray-500 pt-4">
-        <p className="text-lg text-gray-300 pb-5">© 2025 SportPulse. All rights reserved.</p>
+        <p className="text-lg text-gray-300 pb-5">
+          © 2025 SportPulse. All rights reserved.
+        </p>
       </div>
     </div>
   );
