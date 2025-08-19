@@ -1,9 +1,11 @@
+// tbf5txmnqpwy
+// 6TcLpqoZDv-CI1Yzi-zG4_mLpVrfSNyUKQdkrMJZafQ
 import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import HomeImage from "../Images/Home_Pix002.png";
-import Placeholder from "../Images/placeholder.png";
+import Placeholder from "../Images/Placeholder.png";
 import News from "../Images/Home_Pix.jpg";
-import { FaRegComments, FaLongArrowAltRight } from "react-icons/fa";
+import { FaRegComments, FaLongArrowAltRight, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 import { createClient } from "contentful";
@@ -12,8 +14,18 @@ const client = createClient({
   space: "g7ox7xqtg9kf",
   accessToken: "MBk4iBA_vOXWfhfCgNiG5tIm699bbZz9URhMPLZPkk0",
 });
-const Home = () => {
+const Home = ({ input }) => {
   const [blogPosts, setBlogPosts] = useState([]);
+
+  const normalizedInput = input.trim().toLowerCase();
+
+  const filteredItems = blogPosts.filter(
+    (post) =>
+      post.fields.title.toLowerCase().includes(normalizedInput) ||
+      post.fields.summary.toLowerCase().includes(normalizedInput) ||
+      post.fields.category.toLowerCase().includes(normalizedInput) ||
+      post.fields.author.toLowerCase().includes(normalizedInput)
+  );
 
   const getAllEntries = async () => {
     try {
@@ -93,7 +105,7 @@ const Home = () => {
           </div>
 
           {/* Bottom: News Cards */}
-          {blogPosts.slice(0,7).map((post) => (
+          {filteredItems.slice(0, 7).map((post) => (
             <div
               key={post.id}
               className="flex flex-col md:flex-row gap-6 mt-10"
@@ -136,9 +148,15 @@ const Home = () => {
                       By {post.fields.author}
                     </p>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                    <FaRegComments size={15} className="text-[#e93314]" />
-                    <p className="text-xs font-bold">2</p>
+                  <div className="flex items-center gap-3 text-gray-800 font-semibold">
+                    <div className="flex items-center gap-1 text-gray-800 font-semibold">
+                      <FaRegComments size={14} className="text-[#e93314]" />
+                      <small className="font-bold">2</small>
+                    </div>
+                    <div className="flex items-center gap-1 text-gray-800 font-semibold">
+                      <FaRegEye size={14} className="text-[#e93314]" />
+                      <small className="font-bold">2</small>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -250,9 +268,11 @@ const Home = () => {
                   className="w-30 h-20 rounded-lg object-cover"
                 />
                 <div>
-                  <h2 className="text-sm text-gray-800 font-bold hover:text-[#e93314] cursor-pointer">
-                    {post.fields.title}
-                  </h2>
+                  <Link to={`/blogDetails/${post.sys.id}`}>
+                    <h2 className="text-sm text-gray-800 font-bold hover:text-[#e93314] cursor-pointer">
+                      {post.fields.title}
+                    </h2>
+                  </Link>
                   <div className="flex items-center justify-between">
                     <p className="text-gray-500 text-xs">
                       <span className="text-[#e93314]">🕖</span>{" "}
@@ -263,8 +283,14 @@ const Home = () => {
                       })}
                     </p>
                     <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                      <FaRegComments size={15} className="text-[#e93314]" />
-                      <p className="text-xs font-bold">15</p>
+                      <div className="flex items-center gap-1 text-gray-800 font-semibold">
+                        <FaRegComments size={14} className="text-[#e93314]" />
+                        <small className="font-bold">15</small>
+                      </div>
+                      <div className="flex items-center gap-1 text-gray-800 font-semibold">
+                        <FaRegEye size={14} className="text-[#e93314]" />
+                        <small className="font-bold">2</small>
+                      </div>
                     </div>
                   </div>
                 </div>
