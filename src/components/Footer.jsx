@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Logo from "../Images/logo001.jpg";
+import Logo from "../Images/Logo001.jpg";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import ClipLoader from "react-spinners/ClipLoader";
