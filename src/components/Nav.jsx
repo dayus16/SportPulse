@@ -1,6 +1,6 @@
 import React from "react";
 import { IoIosSearch, IoMdMenu, IoMdClose } from "react-icons/io";
-import Logo from "../Images/logo001.jpg";
+import Logo from "../Images/Logo001.jpg";
 import { Link } from "react-router-dom";
 
 const Nav = ({ input, setInput }) => {
