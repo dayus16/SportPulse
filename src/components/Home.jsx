@@ -73,9 +73,9 @@ const Home = ({ input }) => {
           />
         </div>
       </div>
-      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6 w-full">
+      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6 border border-gray-200 rounded-lg">
         {/* Left side: 70% */}
-        <div className="w-full md:w-[70%] space-y-6 border border-gray-200 rounded-lg p-5">
+        <div className="w-full md:w-[70%] p-3 space-y-6 ">
           {/* Top: Title + Buttons */}
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 border-b border-gray-300 pb-2">
             <div>
@@ -164,7 +164,7 @@ const Home = ({ input }) => {
           ))}
           {/* Bottom: News Cards */}
           <div className="flex flex-col md:flex-row gap-6 mt-10">
-            <div className="w-80">
+            <div className="w-full md:w-80">
               <img
                 src={News}
                 alt="News"
@@ -205,7 +205,7 @@ const Home = ({ input }) => {
           </div>
           {/* Bottom: News Cards */}
           <div className="flex flex-col md:flex-row gap-6 mt-10">
-            <div className="w-80">
+            <div className="w-full md:w-80">
               <img
                 src={News}
                 alt="News"
@@ -253,7 +253,7 @@ const Home = ({ input }) => {
         </div>
 
         {/* Right side: 30% */}
-        <div className="w-full md:w-[30%] border border-gray-200 p-5 rounded-lg overflow-auto">
+        <div className="w-full md:w-[30%] p-3 rounded-lg overflow-auto">
           <h2 className="bg-gray-800 text-white py-2 px-8 rounded text-center font-semibold">
             Recent News
           </h2>
