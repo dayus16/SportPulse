@@ -73,7 +73,7 @@ const Home = ({ input }) => {
           />
         </div>
       </div>
-      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6">
+      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6 w-full">
         {/* Left side: 70% */}
         <div className="w-full md:w-[70%] space-y-6 border border-gray-200 rounded-lg p-5">
           {/* Top: Title + Buttons */}

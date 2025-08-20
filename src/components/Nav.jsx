@@ -61,8 +61,8 @@ const Nav = ({ input, setInput }) => {
       </div>
 
       {/* -------------Mobile View----------------------- */}
-      <div className="md:hidden">
-        <div className="flex justify-between items-center p-5">
+      <div className="md:hidden block">
+        <div className="flex justify-between items-center bg-white p-5">
           <div className="text-2xl font-bold flex items-center space-x-2">
             <img src={Logo} alt="SportPulse Logo" className="w-10 h-10" />
             <h1>SportPulse</h1>
