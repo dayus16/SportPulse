@@ -45,10 +45,9 @@ const Footer = () => {
             <h1 className="text-2xl font-bold">SportPulse</h1>
           </div>
           <p className="text-sm text-gray-300 mt-5">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do{" "}
-            <br />
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. <br />
-            Eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+            SportPulse brings you the latest updates, insights, and stories <br /> from
+            the world of sports. From breaking news to in-depth analysis, <br /> we
+            keep fans connected, informed, and inspired — all in one place.
           </p>
         </div>
 

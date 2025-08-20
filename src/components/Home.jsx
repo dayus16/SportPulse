@@ -73,7 +73,7 @@ const Home = ({ input }) => {
           />
         </div>
       </div>
-      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6 border border-gray-200 rounded-lg">
+      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6">
         {/* Left side: 70% */}
         <div className="w-full md:w-[70%] p-3 space-y-6 ">
           {/* Top: Title + Buttons */}
@@ -162,88 +162,7 @@ const Home = ({ input }) => {
               </div>
             </div>
           ))}
-          {/* Bottom: News Cards */}
-          <div className="flex flex-col md:flex-row gap-6 mt-10">
-            <div className="w-full md:w-80">
-              <img
-                src={News}
-                alt="News"
-                className="w-full h-auto rounded-lg object-cover"
-              />
-            </div>
-            <div>
-              <button className="bg-[#e93314] py-1 px-4 text-xs text-white font-bold">
-                Basketball
-              </button>
-              <h2 className="text-2xl text-gray-800 font-bold mt-2 hover:text-[#e93314] cursor-pointer">
-                Start your career right here at home
-              </h2>
-              <p className="text-gray-500 text-xs">
-                <span className="text-[#e93314]">🕖</span> 15 May 2022
-              </p>
-              <p className="text-gray-700 mt-3 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <br /> incididunt.
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <div className="flex items-center gap-2">
-                  <img
-                    src={Placeholder}
-                    alt=""
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <p className="text-xs font-bold text-gray-800 uppercase">
-                    By Mary Rose
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                  <FaRegComments size={15} className="text-[#e93314]" />
-                  <p className="text-xs font-bold">2</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* Bottom: News Cards */}
-          <div className="flex flex-col md:flex-row gap-6 mt-10">
-            <div className="w-full md:w-80">
-              <img
-                src={News}
-                alt="News"
-                className="w-full h-auto rounded-lg object-cover"
-              />
-            </div>
-            <div>
-              <button className="bg-[#e93314] py-1 px-4 text-xs text-white font-bold">
-                Baseball
-              </button>
-              <h2 className="text-2xl text-gray-800 font-bold mt-2 hover:text-[#e93314] cursor-pointer">
-                Start your career right here at home
-              </h2>
-              <p className="text-gray-500 text-xs">
-                <span className="text-[#e93314]">🕖</span> 15 May 2022
-              </p>
-              <p className="text-gray-700 mt-3 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor <br /> incididunt.
-              </p>
-              <div className="flex justify-between items-center mt-4">
-                <div className="flex items-center gap-2">
-                  <img
-                    src={Placeholder}
-                    alt=""
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <p className="text-xs font-bold text-gray-800 uppercase">
-                    By Jane Taylor
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                  <FaRegComments size={15} className="text-[#e93314]" />
-                  <p className="text-xs font-bold">2</p>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className="bg-gray-800 py-2 px-4 text-white font-semibold text-lg rounded mt-10 hover:bg-[#e93314] hover:text-white transition-colors duration-300">
             <Link className="flex items-center justify-center gap-2" to="/blog">
               Go To Blog Page
@@ -296,74 +215,7 @@ const Home = ({ input }) => {
                 </div>
               </div>
             ))}
-          <div className="flex items-center mt-10 gap-3">
-            <img src={News} alt="" className="w-30 rounded-lg object-cover" />
-            <div>
-              <h2 className="text-sm text-gray-800 font-bold hover:text-[#e93314] cursor-pointer">
-                Start your career right here at home
-              </h2>
-              <div className="flex items-center justify-between">
-                <p className="text-gray-500 text-xs">
-                  <span className="text-[#e93314]">🕖</span> 15 May 2022
-                </p>
-                <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                  <FaRegComments size={15} className="text-[#e93314]" />
-                  <p className="text-xs font-bold">15</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center mt-10 gap-3">
-            <img src={News} alt="" className="w-30 rounded-lg object-cover" />
-            <div>
-              <h2 className="text-sm text-gray-800 font-bold hover:text-[#e93314] cursor-pointer">
-                Start your career right here at home
-              </h2>
-              <div className="flex items-center justify-between">
-                <p className="text-gray-500 text-xs">
-                  <span className="text-[#e93314]">🕖</span> 15 May 2022
-                </p>
-                <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                  <FaRegComments size={15} className="text-[#e93314]" />
-                  <p className="text-xs font-bold">15</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center mt-10 gap-3">
-            <img src={News} alt="" className="w-30 rounded-lg object-cover" />
-            <div>
-              <h2 className="text-sm text-gray-800 font-bold hover:text-[#e93314] cursor-pointer">
-                Start your career right here at home
-              </h2>
-              <div className="flex items-center justify-between">
-                <p className="text-gray-500 text-xs">
-                  <span className="text-[#e93314]">🕖</span> 15 May 2022
-                </p>
-                <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                  <FaRegComments size={15} className="text-[#e93314]" />
-                  <p className="text-xs font-bold">15</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center mt-10 gap-3">
-            <img src={News} alt="" className="w-30 rounded-lg object-cover" />
-            <div>
-              <h2 className="text-sm text-gray-800 font-bold hover:text-[#e93314] cursor-pointer">
-                Start your career right here at home
-              </h2>
-              <div className="flex items-center justify-between">
-                <p className="text-gray-500 text-xs">
-                  <span className="text-[#e93314]">🕖</span> 15 May 2022
-                </p>
-                <div className="flex items-center gap-2 text-gray-800 font-semibold">
-                  <FaRegComments size={15} className="text-[#e93314]" />
-                  <p className="text-xs font-bold">15</p>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className="mt-8">
             <h2 className="text-gray-800 text-xl font-bold rounded border-b border-gray-400 pb-2">
               Popular Tags
