@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const client = createClient({
-  space: "g7ox7xqtg9kf",
-  accessToken: "MBk4iBA_vOXWfhfCgNiG5tIm699bbZz9URhMPLZPkk0",
+  space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
+  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
 });
 
 const Blog = () => {

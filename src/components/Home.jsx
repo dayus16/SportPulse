@@ -1,5 +1,3 @@
-// tbf5txmnqpwy
-// 6TcLpqoZDv-CI1Yzi-zG4_mLpVrfSNyUKQdkrMJZafQ
 import React, { useState, useEffect } from "react";
 // import { useParams } from "react-router-dom";
 import HomeImage from "../Images/Home_Pix002.png";
@@ -11,8 +9,8 @@ import { ReactTyped } from "react-typed";
 import { createClient } from "contentful";
 
 const client = createClient({
-  space: "g7ox7xqtg9kf",
-  accessToken: "MBk4iBA_vOXWfhfCgNiG5tIm699bbZz9URhMPLZPkk0",
+  space: process.env.REACT_APP_CONTENTFUL_SPACE_ID,
+  accessToken: process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN,
 });
 const Home = ({ input }) => {
   const [blogPosts, setBlogPosts] = useState([]);
