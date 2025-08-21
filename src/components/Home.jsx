@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-// import { useParams } from "react-router-dom";
 import HomeImage from "../Images/Home_Pix002.png";
 import Placeholder from "../Images/Placeholder.png";
-import News from "../Images/Home_Pix.jpg";
 import { FaRegComments, FaLongArrowAltRight, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 import { createClient } from "contentful";
+import AdBanner from "./AdBanner";
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
 });
+
+
+
 const Home = ({ input }) => {
   const [blogPosts, setBlogPosts] = useState([]);
 
@@ -38,6 +40,28 @@ const Home = ({ input }) => {
   useEffect(() => {
     getAllEntries();
   }, []);
+
+const incrementViews = async (postId) => {
+  try {
+    await fetch("/api/increment-views", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postId }),
+    });
+
+   
+    setBlogPosts((prev) =>
+      prev.map((p) =>
+        p.sys.id === postId
+          ? { ...p, fields: { ...p.fields, views: (p.fields.views || 0) + 1 } }
+          : p
+      )
+    );
+  } catch (err) {
+    console.error("incrementViews failed:", err);
+  }
+};
+
 
   return (
     <div className="text-black p-5">
@@ -71,11 +95,11 @@ const Home = ({ input }) => {
           />
         </div>
       </div>
-      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6">
+      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6 w-full">
         {/* Left side: 70% */}
-        <div className="w-full md:w-[70%] p-3 space-y-6 ">
+        <div className="w-full md:w-[70%] p-3 space-y-6 overflow-auto">
           {/* Top: Title + Buttons */}
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 border-b border-gray-300 pb-2">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 border-b border-gray-300 pb-2 w-full">
             <div>
               <h1 className="text-2xl md:text-3xl text-gray-800 font-bold">
                 Latest World Sport News
@@ -105,7 +129,7 @@ const Home = ({ input }) => {
           {/* Bottom: News Cards */}
           {filteredItems.slice(0, 7).map((post) => (
             <div
-              key={post.id}
+              key={post.sys.id}
               className="flex flex-col md:flex-row gap-6 mt-10"
             >
               <div className="md:w-120 h-40 overflow-hidden rounded-lg">
@@ -119,7 +143,10 @@ const Home = ({ input }) => {
                 <button className="bg-[#e93314] py-1 px-4 text-xs text-white font-bold">
                   {post.fields.category}
                 </button>
-                <Link to={`/blogDetails/${post.sys.id}`}>
+                <Link
+                  to={`/blogDetails/${post.sys.id}`}
+                  onClick={() => incrementViews(post.sys.id)}
+                >
                   <h2 className="text-2xl text-gray-800 font-bold mt-2 hover:text-[#e93314] cursor-pointer">
                     {post.fields.title}
                   </h2>
@@ -153,7 +180,9 @@ const Home = ({ input }) => {
                     </div>
                     <div className="flex items-center gap-1 text-gray-800 font-semibold">
                       <FaRegEye size={14} className="text-[#e93314]" />
-                      <small className="font-bold">2</small>
+                      <small className="font-bold">
+                        {post.fields.views || 0}
+                      </small>
                     </div>
                   </div>
                 </div>
@@ -178,14 +207,17 @@ const Home = ({ input }) => {
             .sort((a, b) => new Date(b.fields.date) - new Date(a.fields.date))
             .slice(0, 5)
             .map((post) => (
-              <div key={post.id} className="flex items-center mt-10 gap-3">
+              <div key={post.sys.id} className="flex items-center mt-10 gap-3">
                 <img
                   src={post.fields.image.fields.file.url}
                   alt={post.fields.title}
                   className="w-30 h-20 rounded-lg object-cover"
                 />
                 <div>
-                  <Link to={`/blogDetails/${post.sys.id}`}>
+                  <Link
+                    to={`/blogDetails/${post.sys.id}`}
+                    onClick={() => incrementViews(post.sys.id)}
+                  >
                     <h2 className="text-sm text-gray-800 font-bold hover:text-[#e93314] cursor-pointer">
                       {post.fields.title}
                     </h2>
@@ -206,13 +238,16 @@ const Home = ({ input }) => {
                       </div>
                       <div className="flex items-center gap-1 text-gray-800 font-semibold">
                         <FaRegEye size={14} className="text-[#e93314]" />
-                        <small className="font-bold">2</small>
+                        <small className="font-bold">
+                          {post.fields.views || 0}
+                        </small>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
+          <AdBanner />
 
           <div className="mt-8">
             <h2 className="text-gray-800 text-xl font-bold rounded border-b border-gray-400 pb-2">

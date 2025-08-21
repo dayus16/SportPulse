@@ -5,10 +5,11 @@ import Background from "../Images/Home_Pix.jpg";
 import { createClient } from "contentful";
 import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import AdBanner from "./AdBanner";
 
 const client = createClient({
-  space: "g7ox7xqtg9kf",
-  accessToken: "MBk4iBA_vOXWfhfCgNiG5tIm699bbZz9URhMPLZPkk0",
+  space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+  accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
 });
 
 const BlogDetails = () => {
@@ -145,6 +146,7 @@ const BlogDetails = () => {
                 className="rounded-lg w-full h-120 object-cover overflow-hidden rounded-t-lg"
               />
             </div>
+            <AdBanner />
 
             <div className="mt-6 text-lg text-gray-800">
               {blogPost.fields.postContent}

@@ -1,11 +1,11 @@
-import React from "react";
+import { useState } from "react";
 import { IoIosSearch, IoMdMenu, IoMdClose } from "react-icons/io";
 import Logo from "../Images/Logo001.jpg";
 import { Link } from "react-router-dom";
 
 const Nav = ({ input, setInput }) => {
-  const [inputField, setInputField] = React.useState(false);
-  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [inputField, setInputField] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const handleSearch = () => {
     setInputField(!inputField);
   };
@@ -62,7 +62,7 @@ const Nav = ({ input, setInput }) => {
 
       {/* -------------Mobile View----------------------- */}
       <div className="md:hidden block">
-        <div className="flex justify-between items-center bg-white p-5">
+        <div className="flex justify-between items-center bg-white p-5 shadow-lg">
           <div className="text-2xl font-bold flex items-center space-x-2">
             <img src={Logo} alt="SportPulse Logo" className="w-10 h-10" />
             <h1>SportPulse</h1>

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Photo from "../Images/Home_Pix.jpg";
 import { createClient } from "contentful";
 import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
