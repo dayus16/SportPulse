@@ -14,9 +14,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method !== "POST") {
-    return res
-      .status(405)
-      .json({ error: "Method Not Allowed" });
+    return res.status(405).json({ error: "Method Not Allowed" });
   }
 
   try {
@@ -31,7 +29,9 @@ export default async function handler(req, res) {
     const entry = await env.getEntry(postId);
 
     const current =
-      (entry.fields.views && entry.fields.views[LOCALE]) ? entry.fields.views[LOCALE] : 0;
+      entry.fields.views && entry.fields.views[LOCALE]
+        ? entry.fields.views[LOCALE]
+        : 0;
 
     entry.fields.views = {
       ...(entry.fields.views || {}),
