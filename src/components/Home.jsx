@@ -95,7 +95,7 @@ const incrementViews = async (postId) => {
           />
         </div>
       </div>
-      <div className="mt-10 flex flex-col md:flex-row p-5 gap-6 w-full">
+      <div className="mt-10 flex flex-col md:flex-row gap-6 w-full">
         {/* Left side: 70% */}
         <div className="w-full md:w-[70%] p-3 space-y-6 overflow-auto">
           {/* Top: Title + Buttons */}
