@@ -1,10 +1,5 @@
 import { createClient } from "contentful-management";
 
-const SPACE_ID = process.env.VITE_CONTENTFUL_SPACE_ID;
-const MANAGEMENT_TOKEN = process.env.VITE_CONTENTFUL_MANAGEMENT_TOKEN;
-const ENVIRONMENT = process.env.CONTENTFUL_ENVIRONMENT || "main";
-const LOCALE = process.env.CONTENTFUL_LOCALE || "en-US";
-
 export default async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.setHeader("Access-Control-Allow-Origin", "*");
@@ -18,6 +13,11 @@ export default async function handler(req, res) {
   }
 
   try {
+    const SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
+    const MANAGEMENT_TOKEN = process.env.CONTENTFUL_MANAGEMENT_TOKEN;
+    const ENVIRONMENT = process.env.CONTENTFUL_ENVIRONMENT || "main";
+    const LOCALE = process.env.CONTENTFUL_LOCALE || "en-US";
+
     const { postId } = req.body;
     if (!postId) {
       return res.status(400).json({ error: "postId is required" });
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({ ok: true, views: updated.fields.views[LOCALE] });
   } catch (err) {
-    console.error("incrementViews error:", err);
+    console.error("incrementViews error:", err.message);
     res.status(500).json({ error: "Failed to increment views" });
   }
 }

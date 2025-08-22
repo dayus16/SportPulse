@@ -45,9 +45,10 @@ const Footer = () => {
             <h1 className="text-2xl font-bold">SportPulse</h1>
           </div>
           <p className="text-sm text-gray-300 mt-5">
-            SportPulse brings you the latest updates, insights, and stories <br /> from
-            the world of sports. From breaking news to in-depth analysis, <br /> we
-            keep fans connected, informed, and inspired — all in one place.
+            SportPulse brings you the latest updates, insights, and stories{" "}
+            <br /> from the world of sports. From breaking news to in-depth
+            analysis, <br /> we keep fans connected, informed, and inspired —
+            all in one place.
           </p>
         </div>
 
@@ -96,26 +97,20 @@ const Footer = () => {
             Want to be notified when we launch a new template or an udpate.{" "}
             <br /> Just sign up and we'll send you a notification by email.
           </p>
-          <div className="space-x-1">
+          <div className="flex items-center space-x-1 mt-5">
             <input
               type="email"
               placeholder="Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-5 border border-gray-500 outline-none py-2 px-4 rounded bg-gray-600"
+              className="border border-gray-500 flex-1 outline-none py-2 px-4 rounded bg-gray-600"
             />
             <button
               onClick={handleSendButton}
-              className="bg-[#e93314] py-2 px-6 w-20 rounded cursor-pointer"
+              className="bg-[#e93314] py-2 px-6 rounded cursor-pointer flex items-center justify-center"
             >
-              {loading ? (
-                <div className="flex jusitify-center items-center">
-                  <ClipLoader color="fff" size={20} />
-                </div>
-              ) : (
-                "Send"
-              )}
+              {loading ? <ClipLoader color="#fff" size={20} /> : "Send"}
             </button>
           </div>
         </div>

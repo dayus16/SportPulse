@@ -46,17 +46,6 @@ const Home = ({ input }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ postId }),
       });
-
-      setBlogPosts((prev) =>
-        prev.map((p) =>
-          p.sys.id === postId
-            ? {
-                ...p,
-                fields: { ...p.fields, views: (p.fields.views || 0) + 1 },
-              }
-            : p
-        )
-      );
     } catch (err) {
       console.error("incrementViews failed:", err);
     }
