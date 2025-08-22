@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import HomeImage from "../Images/Home_Pix002.png";
 import Placeholder from "../Images/Placeholder.png";
 import { FaRegComments, FaLongArrowAltRight, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 import { createClient } from "contentful";
-import AdBanner from "./AdBanner";
+import Adbanner from "./Adbanner.jsx";
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
 });
-
-
 
 const Home = ({ input }) => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -41,27 +39,28 @@ const Home = ({ input }) => {
     getAllEntries();
   }, []);
 
-const incrementViews = async (postId) => {
-  try {
-    await fetch("/api/increment-views", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ postId }),
-    });
+  const incrementViews = async (postId) => {
+    try {
+      await fetch("/api/increment-views", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ postId }),
+      });
 
-   
-    setBlogPosts((prev) =>
-      prev.map((p) =>
-        p.sys.id === postId
-          ? { ...p, fields: { ...p.fields, views: (p.fields.views || 0) + 1 } }
-          : p
-      )
-    );
-  } catch (err) {
-    console.error("incrementViews failed:", err);
-  }
-};
-
+      setBlogPosts((prev) =>
+        prev.map((p) =>
+          p.sys.id === postId
+            ? {
+                ...p,
+                fields: { ...p.fields, views: (p.fields.views || 0) + 1 },
+              }
+            : p
+        )
+      );
+    } catch (err) {
+      console.error("incrementViews failed:", err);
+    }
+  };
 
   return (
     <div className="text-black p-5">
@@ -247,8 +246,7 @@ const incrementViews = async (postId) => {
                 </div>
               </div>
             ))}
-          <AdBanner />
-
+          <Adbanner />
           <div className="mt-8">
             <h2 className="text-gray-800 text-xl font-bold rounded border-b border-gray-400 pb-2">
               Popular Tags

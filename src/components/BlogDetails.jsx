@@ -5,7 +5,7 @@ import Background from "../Images/Home_Pix.jpg";
 import { createClient } from "contentful";
 import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import AdBanner from "./AdBanner";
+import Adbanner from "./Adbanner.jsx";
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
@@ -146,8 +146,7 @@ const BlogDetails = () => {
                 className="rounded-lg w-full h-120 object-cover overflow-hidden rounded-t-lg"
               />
             </div>
-            <AdBanner />
-
+            <Adbanner />
             <div className="mt-6 text-lg text-gray-800">
               {blogPost.fields.postContent}
             </div>

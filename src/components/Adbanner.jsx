@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
-const AdBanner = () => {
+const Adbanner = () => {
+  const containerRef = useRef(null);
+
   useEffect(() => {
+    if (!containerRef.current) return;
+
     // Create the first script (for atOptions)
     const inlineScript = document.createElement("script");
     inlineScript.type = "text/javascript";
@@ -22,21 +26,22 @@ const AdBanner = () => {
       "//www.highperformanceformat.com/15fd1ee411de14e2e262fb12db45829f/invoke.js";
     externalScript.async = true;
 
-    const container = document.getElementById("ad-container");
-    if (container) {
-      container.appendChild(inlineScript);
-      container.appendChild(externalScript);
-    }
+    // Append scripts to container
+    containerRef.current.appendChild(inlineScript);
+    containerRef.current.appendChild(externalScript);
 
+    // Cleanup on unmount
     return () => {
-      if (container) container.innerHTML = ""; // cleanup when component unmounts
+      if (containerRef.current) {
+        containerRef.current.innerHTML = "";
+      }
     };
   }, []);
 
   return (
     <div className="flex justify-center items-center my-6">
       <div
-        id="ad-container"
+        ref={containerRef}
         className="w-[300px] h-[250px] bg-gray-100 flex justify-center items-center rounded-lg shadow-md"
       >
         <span className="text-gray-400 text-sm">Loading ad...</span>
@@ -45,4 +50,4 @@ const AdBanner = () => {
   );
 };
 
-export default AdBanner;
+export default Adbanner;
