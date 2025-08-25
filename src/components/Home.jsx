@@ -208,6 +208,7 @@ const Home = ({ input }) => {
               <FaLongArrowAltRight />
             </Link>
           </div>
+          <Adbanner />
         </div>
 
         {/* Right side: 30% */}
