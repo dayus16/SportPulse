@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import { createClient } from "contentful";
 import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import { createClient as createManagementClient } from "contentful-management";
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
+});
+const managementClient = createManagementClient({
+  accessToken: import.meta.env.VITE_CONTENTFUL_MANAGEMENT_TOKEN,
 });
 
 const Blog = () => {
@@ -24,6 +28,37 @@ const Blog = () => {
     getAllEntries();
   }, []);
 
+  const incrementViews = async (postId) => {
+    try {
+      const space = await managementClient.getSpace(
+        import.meta.env.VITE_CONTENTFUL_SPACE_ID
+      );
+      const environment = await space.getEnvironment("master");
+
+      // Get the latest entry
+      let entry = await environment.getEntry(postId);
+
+      // Increment views
+      const currentViews = entry.fields.views?.["en-US"] || 0;
+      entry.fields.views = { "en-US": currentViews + 1 };
+
+      // Update the entry
+      entry = await entry.update();
+
+      // Publish the entry
+      await entry.publish();
+
+      console.log(`Views updated to ${currentViews + 1}`);
+    } catch (error) {
+      if (error.name === "VersionMismatch") {
+        console.warn("Version mismatch, retrying...");
+        await incrementViews(postId); // retry once
+      } else {
+        console.error("Error incrementing views:", error);
+      }
+    }
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen p-5">
       <h1 className="text-4xl font-bold p-5">Blogs</h1>
@@ -40,7 +75,10 @@ const Blog = () => {
                 {post.fields.category}
               </h1>
               <div className="mt-4 text-xl font-bold text-gray-800 hover:text-[#e93314]">
-                <Link to={`/blogDetails/${post.sys.id}`}>
+                <Link
+                  to={`/blogDetails/${post.sys.id}`}
+                  onClick={() => incrementViews(post.sys.id)}
+                >
                   <p>{post.fields.title}</p>
                 </Link>
               </div>

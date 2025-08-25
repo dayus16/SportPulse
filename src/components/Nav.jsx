@@ -64,7 +64,11 @@ const Nav = ({ input, setInput }) => {
       <div className="md:hidden block">
         <div className="flex justify-between items-center bg-white p-5 shadow-lg">
           <div className="text-2xl font-bold flex items-center space-x-2">
-            <img src={Logo} alt="SportPulse Logo" className="w-10 h-10" />
+            <img
+              src={Logo}
+              alt="SportPulse Logo"
+              className="w-10 h-10 rounded-lg"
+            />
             <h1>SportPulse</h1>
           </div>
 
@@ -103,19 +107,29 @@ const Nav = ({ input, setInput }) => {
           <div className="flex flex-col items-center bg-white text-black shadow-lg p-5">
             <ul className="space-y-4 cursor-pointer">
               <li className="hover:text-[#e93314]">
-                <Link to="/">Home</Link>
+                <Link to="/" onClick={() => setMenuOpen(false)}>
+                  Home
+                </Link>
               </li>
               <li className="hover:text-[#e93314]">
-                <Link to="/about">About</Link>
+                <Link to="/about" onClick={() => setMenuOpen(false)}>
+                  About
+                </Link>
               </li>
               <li className="hover:text-[#e93314]">
-                <Link to="/contact">Contacts</Link>
+                <Link to="/contact" onClick={() => setMenuOpen(false)}>
+                  Contacts
+                </Link>
               </li>
               <li className="hover:text-[#e93314]">
-                <Link to="/blog">Blog</Link>
+                <Link to="/blog" onClick={() => setMenuOpen(false)}>
+                  Blog
+                </Link>
               </li>
               <li className="hover:text-[#e93314]">
-                <Link to="/privacy">Privacy Policy</Link>
+                <Link to="/privacy" onClick={() => setMenuOpen(false)}>
+                  Privacy Policy
+                </Link>
               </li>
             </ul>
           </div>

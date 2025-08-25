@@ -6,10 +6,14 @@ import { Link } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 import { createClient } from "contentful";
 import Adbanner from "./Adbanner.jsx";
+import { createClient as createManagementClient } from "contentful-management";
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
+});
+const managementClient = createManagementClient({
+  accessToken: import.meta.env.VITE_CONTENTFUL_MANAGEMENT_TOKEN,
 });
 
 const Home = ({ input }) => {
@@ -41,13 +45,32 @@ const Home = ({ input }) => {
 
   const incrementViews = async (postId) => {
     try {
-      await fetch("/api/increment-views", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ postId }),
-      });
-    } catch (err) {
-      console.error("incrementViews failed:", err);
+      const space = await managementClient.getSpace(
+        import.meta.env.VITE_CONTENTFUL_SPACE_ID
+      );
+      const environment = await space.getEnvironment("master");
+
+      // Get the latest entry
+      let entry = await environment.getEntry(postId);
+
+      // Increment views
+      const currentViews = entry.fields.views?.["en-US"] || 0;
+      entry.fields.views = { "en-US": currentViews + 1 };
+
+      // Update the entry
+      entry = await entry.update();
+
+      // Publish the entry
+      await entry.publish();
+
+      console.log(`Views updated to ${currentViews + 1}`);
+    } catch (error) {
+      if (error.name === "VersionMismatch") {
+        console.warn("Version mismatch, retrying...");
+        await incrementViews(postId); // retry once
+      } else {
+        console.error("Error incrementing views:", error);
+      }
     }
   };
 
@@ -120,13 +143,14 @@ const Home = ({ input }) => {
               key={post.sys.id}
               className="flex flex-col md:flex-row gap-6 mt-10"
             >
-              <div className="md:w-120 h-40 overflow-hidden rounded-lg">
+              <div className="overflow-hidden rounded-lg">
                 <img
                   src={post.fields.image.fields.file.url}
                   alt={post.fields.title}
-                  className="w-full h-full object-cover"
+                  className="object-cover w-full h-48 rounded-lg"
                 />
               </div>
+
               <div>
                 <button className="bg-[#e93314] py-1 px-4 text-xs text-white font-bold">
                   {post.fields.category}
@@ -164,7 +188,7 @@ const Home = ({ input }) => {
                   <div className="flex items-center gap-3 text-gray-800 font-semibold">
                     <div className="flex items-center gap-1 text-gray-800 font-semibold">
                       <FaRegComments size={14} className="text-[#e93314]" />
-                      <small className="font-bold">2</small>
+                      <small className="font-bold">0</small>
                     </div>
                     <div className="flex items-center gap-1 text-gray-800 font-semibold">
                       <FaRegEye size={14} className="text-[#e93314]" />
@@ -222,7 +246,7 @@ const Home = ({ input }) => {
                     <div className="flex items-center gap-2 text-gray-800 font-semibold">
                       <div className="flex items-center gap-1 text-gray-800 font-semibold">
                         <FaRegComments size={14} className="text-[#e93314]" />
-                        <small className="font-bold">15</small>
+                        <small className="font-bold">0</small>
                       </div>
                       <div className="flex items-center gap-1 text-gray-800 font-semibold">
                         <FaRegEye size={14} className="text-[#e93314]" />

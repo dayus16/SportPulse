@@ -6,15 +6,62 @@ import { createClient } from "contentful";
 import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import Adbanner from "./Adbanner.jsx";
+import { createClient as createManagementClient } from "contentful-management";
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
 });
+const managementClient = createManagementClient({
+  accessToken: import.meta.env.VITE_CONTENTFUL_MANAGEMENT_TOKEN,
+});
 
 const BlogDetails = () => {
   const { id } = useParams();
   const [blogPost, setBlogPost] = useState(null);
+
+  const incrementViews = async (postId) => {
+  try {
+    const space = await managementClient.getSpace(
+      import.meta.env.VITE_CONTENTFUL_SPACE_ID
+    );
+    const environment = await space.getEnvironment("master");
+    let entry = await environment.getEntry(postId);
+
+    const currentViews = entry.fields.views?.["en-US"] || 0;
+    entry.fields.views = { "en-US": currentViews + 1 };
+
+    entry = await entry.update();
+    await entry.publish();
+
+    // ✅ Update the UI right away
+    setBlogPost((prev) => ({
+      ...prev,
+      fields: {
+        ...prev.fields,
+        views: { "en-US": currentViews + 1 },
+      },
+    }));
+  } catch (error) {
+    console.error("Error incrementing views:", error);
+  }
+};
+useEffect(() => {
+  const fetchEntry = async () => {
+    try {
+      const response = await client.getEntry(id);
+      setBlogPost(response);
+
+      // ✅ increment views after fetch
+      await incrementViews(id);
+    } catch (error) {
+      console.error("Error fetching entry:", error);
+    }
+  };
+
+  if (id) fetchEntry();
+}, [id]);
+
 
   useEffect(() => {
     const fetchEntry = async () => {
@@ -30,6 +77,7 @@ const BlogDetails = () => {
   }, [id]);
 
   // ✅ Load comments from localStorage on mount
+
   const [comments, setComments] = useState(() => {
     const saved = localStorage.getItem(`comments_${id}`);
     return saved ? JSON.parse(saved) : [];
@@ -134,7 +182,10 @@ const BlogDetails = () => {
                 </div>
                 <div className="flex items-center gap-1 text-gray-800 font-semibold">
                   <FaRegEye size={15} className="text-[#e93314]" />
-                  <small className="text-xs font-bold">2</small>
+                  <small className="text-xs font-bold">
+                    {" "}
+                    {blogPost.fields.views?.["en-US"] || 0}
+                  </small>
                 </div>
               </div>
             </div>
