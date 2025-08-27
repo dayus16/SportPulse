@@ -20,47 +20,47 @@ const BlogDetails = () => {
   const { id } = useParams();
   const [blogPost, setBlogPost] = useState(null);
 
-  const incrementViews = async (postId) => {
-  try {
-    const space = await managementClient.getSpace(
-      import.meta.env.VITE_CONTENTFUL_SPACE_ID
-    );
-    const environment = await space.getEnvironment("master");
-    let entry = await environment.getEntry(postId);
+//   const incrementViews = async (postId) => {
+//   try {
+//     const space = await managementClient.getSpace(
+//       import.meta.env.VITE_CONTENTFUL_SPACE_ID
+//     );
+//     const environment = await space.getEnvironment("master");
+//     let entry = await environment.getEntry(postId);
 
-    const currentViews = entry.fields.views?.["en-US"] || 0;
-    entry.fields.views = { "en-US": currentViews + 1 };
+//     const currentViews = entry.fields.views?.["en-US"] || 0;
+//     entry.fields.views = { "en-US": currentViews + 1 };
 
-    entry = await entry.update();
-    await entry.publish();
+//     entry = await entry.update();
+//     await entry.publish();
 
-    // ✅ Update the UI right away
-    setBlogPost((prev) => ({
-      ...prev,
-      fields: {
-        ...prev.fields,
-        views: { "en-US": currentViews + 1 },
-      },
-    }));
-  } catch (error) {
-    console.error("Error incrementing views:", error);
-  }
-};
-useEffect(() => {
-  const fetchEntry = async () => {
-    try {
-      const response = await client.getEntry(id);
-      setBlogPost(response);
+//     // ✅ Update the UI right away
+//     setBlogPost((prev) => ({
+//       ...prev,
+//       fields: {
+//         ...prev.fields,
+//         views: { "en-US": currentViews + 1 },
+//       },
+//     }));
+//   } catch (error) {
+//     console.error("Error incrementing views:", error);
+//   }
+// };
+// useEffect(() => {
+//   const fetchEntry = async () => {
+//     try {
+//       const response = await client.getEntry(id);
+//       setBlogPost(response);
 
-      // ✅ increment views after fetch
-      await incrementViews(id);
-    } catch (error) {
-      console.error("Error fetching entry:", error);
-    }
-  };
+//       // ✅ increment views after fetch
+//       await incrementViews(id);
+//     } catch (error) {
+//       console.error("Error fetching entry:", error);
+//     }
+//   };
 
-  if (id) fetchEntry();
-}, [id]);
+//   if (id) fetchEntry();
+// }, [id]);
 
 
   useEffect(() => {
