@@ -20,7 +20,7 @@ const BlogDetails = () => {
   const { id } = useParams();
   const [blogPost, setBlogPost] = useState(null);
 
-//   const incrementViews = async (postId) => {
+  const incrementViews = async (postId) => {
 //   try {
 //     const space = await managementClient.getSpace(
 //       import.meta.env.VITE_CONTENTFUL_SPACE_ID
