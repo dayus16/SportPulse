@@ -138,7 +138,7 @@ const Home = ({ input }) => {
           </div>
 
           {/* Bottom: News Cards */}
-          {filteredItems.slice(0, 7).map((post) => (
+          {filteredItems.slice(0, 5).map((post) => (
             <div
               key={post.sys.id}
               className="flex flex-col md:flex-row gap-6 mt-10"
@@ -208,7 +208,6 @@ const Home = ({ input }) => {
               <FaLongArrowAltRight />
             </Link>
           </div>
-          <Adbanner />
         </div>
 
         {/* Right side: 30% */}

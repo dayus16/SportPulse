@@ -67,7 +67,7 @@ const Nav = ({ input, setInput }) => {
             <img
               src={Logo}
               alt="SportPulse Logo"
-              className="w-10 h-10 rounded-lg"
+              className="w-10 h-10 rounded-full"
             />
             <h1>SportPulse</h1>
           </div>
