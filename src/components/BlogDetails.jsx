@@ -8,10 +8,13 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Adbanner from "./Adbanner.jsx";
 import { createClient as createManagementClient } from "contentful-management";
 
+// Contentful client
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
 });
+
+
 const managementClient = createManagementClient({
   accessToken: import.meta.env.VITE_CONTENTFUL_MANAGEMENT_TOKEN,
 });
@@ -20,49 +23,7 @@ const BlogDetails = () => {
   const { id } = useParams();
   const [blogPost, setBlogPost] = useState(null);
 
-  const incrementViews = async (postId) => {
-//   try {
-//     const space = await managementClient.getSpace(
-//       import.meta.env.VITE_CONTENTFUL_SPACE_ID
-//     );
-//     const environment = await space.getEnvironment("master");
-//     let entry = await environment.getEntry(postId);
-
-//     const currentViews = entry.fields.views?.["en-US"] || 0;
-//     entry.fields.views = { "en-US": currentViews + 1 };
-
-//     entry = await entry.update();
-//     await entry.publish();
-
-//     // ✅ Update the UI right away
-//     setBlogPost((prev) => ({
-//       ...prev,
-//       fields: {
-//         ...prev.fields,
-//         views: { "en-US": currentViews + 1 },
-//       },
-//     }));
-//   } catch (error) {
-//     console.error("Error incrementing views:", error);
-//   }
-// };
-// useEffect(() => {
-//   const fetchEntry = async () => {
-//     try {
-//       const response = await client.getEntry(id);
-//       setBlogPost(response);
-
-//       // ✅ increment views after fetch
-//       await incrementViews(id);
-//     } catch (error) {
-//       console.error("Error fetching entry:", error);
-//     }
-//   };
-
-//   if (id) fetchEntry();
-// }, [id]);
-
-
+  // Fetch blog entry
   useEffect(() => {
     const fetchEntry = async () => {
       try {
@@ -76,14 +37,54 @@ const BlogDetails = () => {
     if (id) fetchEntry();
   }, [id]);
 
-  // ✅ Load comments from localStorage on mount
+  const incrementViews = async (postId) => {
+    try {
+      const space = await managementClient.getSpace(
+        import.meta.env.VITE_CONTENTFUL_SPACE_ID
+      );
+      const environment = await space.getEnvironment("master");
+      let entry = await environment.getEntry(postId);
 
+      const currentViews = entry.fields.views?.["en-US"] || 0;
+      entry.fields.views = { "en-US": currentViews + 1 };
+
+      entry = await entry.update();
+      await entry.publish();
+
+      // ✅ Update the UI right away
+      setBlogPost((prev) => ({
+        ...prev,
+        fields: {
+          ...prev.fields,
+          views: { "en-US": currentViews + 1 },
+        },
+      }));
+    } catch (error) {
+      console.error("Error incrementing views:", error);
+    }
+  };
+  useEffect(() => {
+    const fetchEntry = async () => {
+      try {
+        const response = await client.getEntry(id);
+        setBlogPost(response);
+
+        // ✅ increment views after fetch
+        await incrementViews(id);
+      } catch (error) {
+        console.error("Error fetching entry:", error);
+      }
+    };
+
+    if (id) fetchEntry();
+  }, [id]);
+
+  // Comments state (localStorage persistence)
   const [comments, setComments] = useState(() => {
     const saved = localStorage.getItem(`comments_${id}`);
     return saved ? JSON.parse(saved) : [];
   });
 
-  // ✅ Save comments to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem(`comments_${id}`, JSON.stringify(comments));
   }, [comments, id]);
@@ -102,7 +103,7 @@ const BlogDetails = () => {
       email,
       message,
       date: new Date().toLocaleString(),
-      replies: [], // ✅ store replies inside
+      replies: [],
     };
 
     setComments([newComment, ...comments]);
@@ -111,7 +112,7 @@ const BlogDetails = () => {
     setMessage("");
   };
 
-  // ✅ Handle reply
+  // Handle replies to comments
   const handleReply = (commentId, replyText, replyName) => {
     if (!replyText || !replyName) return;
 
@@ -138,7 +139,6 @@ const BlogDetails = () => {
   return (
     <div className="mt-10 w-full md:w-[70%]">
       <div className="p-8">
-        {/* Blog content */}
         {blogPost ? (
           <>
             <button className="bg-[#e93314] py-1 px-4 text-white text-sm">
@@ -149,12 +149,13 @@ const BlogDetails = () => {
               {blogPost.fields.title}
             </h1>
 
+            {/* Author + Date + Stats */}
             <div className="flex flex-col md:flex-row items-center justify-between mt-3">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <img
                     src={Placeholder}
-                    alt=""
+                    alt="author"
                     className="w-10 h-10 rounded-full"
                   />
                   <p className="text-xs font-bold text-gray-800">
@@ -175,29 +176,33 @@ const BlogDetails = () => {
                   </p>
                 </div>
               </div>
+
               <div className="flex items-center gap-3 text-gray-800 font-semibold">
-                <div className="flex items-center gap-1 text-gray-800 font-semibold">
+                <div className="flex items-center gap-1">
                   <FaRegComments size={15} className="text-[#e93314]" />
                   <small className="text-xs font-bold">{comments.length}</small>
                 </div>
-                <div className="flex items-center gap-1 text-gray-800 font-semibold">
+                <div className="flex items-center gap-1">
                   <FaRegEye size={15} className="text-[#e93314]" />
                   <small className="text-xs font-bold">
-                    {" "}
                     {blogPost.fields.views?.["en-US"] || 0}
                   </small>
                 </div>
               </div>
             </div>
 
+            {/* Image */}
             <div className="mt-4">
               <img
                 src={blogPost.fields.image?.fields?.file?.url || Background}
                 alt={blogPost.fields.title}
-                className="rounded-lg w-full h-120 object-cover overflow-hidden rounded-t-lg"
+                className="rounded-lg w-full h-120 object-cover"
               />
             </div>
+
             <Adbanner />
+
+            {/* Content */}
             <div className="mt-6 text-lg text-gray-800">
               {blogPost.fields.postContent}
             </div>
@@ -253,7 +258,7 @@ const BlogDetails = () => {
               </div>
             </form>
 
-            {/* Display Comments */}
+            {/* Comments List */}
             <div className="mt-10">
               <h2 className="text-xl font-bold mb-4">
                 Comments ({comments.length})
@@ -280,7 +285,7 @@ const BlogDetails = () => {
   );
 };
 
-// ✅ Separate component for comment + replies
+// ✅ Reusable Comment + Replies component
 const CommentItem = ({ comment, onReply }) => {
   const [replying, setReplying] = useState(false);
   const [replyText, setReplyText] = useState("");
@@ -333,7 +338,7 @@ const CommentItem = ({ comment, onReply }) => {
         </form>
       )}
 
-      {/* Nested replies */}
+      {/* Nested Replies */}
       {comment.replies.length > 0 && (
         <div className="mt-3 ml-5 border-l pl-3 space-y-2">
           {comment.replies.map((r) => (
