@@ -74,7 +74,7 @@ const Blog = () => {
                 alt={post.fields.title}
                 className="w-full h-64 object-cover rounded-lg"
               />
-              <h1 className="absolute top-0 bg-[#e93314] text-white text-sm py-1 px-4">
+              <h1 className="absolute top-0 bg-gray-200 text-black text-sm py-1 px-4">
                 {post.fields.category}
               </h1>
               <div className="mt-4 text-xl font-bold text-gray-800 hover:text-[#e93314]">

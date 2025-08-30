@@ -10,6 +10,7 @@ import Blog from "./components/Blog";
 import BlogDetails from "./components/BlogDetails";
 
 import { Toaster } from "react-hot-toast";
+import SocialBar from "./components/SocialBar";
 
 const App = () => {
   const [input, setInput] = useState("");
@@ -17,6 +18,7 @@ const App = () => {
     <div className="bg-gray-100 min-h-screen">
       <BrowserRouter>
         <Nav input={input} setInput={setInput} />
+        <SocialBar />
         <Toaster position="top-right" />
         <Routes>
           <Route

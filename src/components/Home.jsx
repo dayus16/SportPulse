@@ -120,19 +120,19 @@ const Home = ({ input }) => {
 
             <div className="">
               <button className="bg-[#e93314] text-white py-1 px-4 text-xs md:text-sm cursor-pointer">
-                Football
+                Epl
               </button>
               <button className="border border-gray-400 py-1 px-4 text-xs md:text-sm cursor-pointer">
-                Basketball
+                Laliga
               </button>
               <button className="border border-gray-400 py-1 px-4 text-xs md:text-sm cursor-pointer">
-                Baseball
+                Bundesliga
               </button>
               <button className="border border-gray-400 py-1 px-4 text-xs md:text-sm cursor-pointer">
-                Hockey
+                Serie A
               </button>
               <button className="border border-gray-400 py-1 px-4 text-xs md:text-sm cursor-pointer">
-                Table Tennis
+                Ligue 1
               </button>
             </div>
           </div>
@@ -143,7 +143,7 @@ const Home = ({ input }) => {
               key={post.sys.id}
               className="flex flex-col md:flex-row gap-6 mt-10"
             >
-              <div className="overflow-hidden rounded-lg">
+              <div className="w-full overflow-hidden rounded-lg">
                 <img
                   src={post.fields.image.fields.file.url}
                   alt={post.fields.title}
@@ -220,11 +220,13 @@ const Home = ({ input }) => {
             .slice(0, 5)
             .map((post) => (
               <div key={post.sys.id} className="flex items-center mt-10 gap-3">
-                <img
-                  src={post.fields.image.fields.file.url}
-                  alt={post.fields.title}
-                  className="w-30 h-20 rounded-lg object-cover"
-                />
+                <div className="w-full overflow-hidden rounded-lg object-cover">
+                  <img
+                    src={post.fields.image.fields.file.url}
+                    alt={post.fields.title}
+                    className="w-30 h-20 rounded-lg object-cover"
+                  />
+                </div>
                 <div>
                   <Link
                     to={`/blogDetails/${post.sys.id}`}
@@ -266,19 +268,19 @@ const Home = ({ input }) => {
             </h2>
             <div className="mt-5 flex items-center flex-wrap gap-2">
               <h1 className="bg-gray-800 py-1 px-4 text-white font-bold text-sm">
-                Football
+                Epl
               </h1>
               <h1 className="bg-gray-800 py-1 px-4 text-white font-bold text-sm">
-                Basketball
+                Laliga
               </h1>
               <h1 className="bg-gray-800 py-1 px-4 text-white font-bold text-sm">
-                Baseball
+                Bundesliga
               </h1>
               <h1 className="bg-gray-800 py-1 px-4 text-white font-bold text-sm">
-                Hockey
+                Serie A
               </h1>
               <h1 className="bg-gray-800 py-1 px-4 text-white font-bold text-sm">
-                Table_tennis
+                Ligue 1
               </h1>
             </div>
           </div>

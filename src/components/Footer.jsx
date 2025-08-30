@@ -57,11 +57,11 @@ const Footer = () => {
             Categories
           </h1>
           <div className="space-y-2">
-            <p className="mt-3 text-gray-300 text-sm">Football</p>
-            <p className="text-gray-300 text-sm">Basketball</p>
-            <p className="text-gray-300 text-sm">Baseball</p>
-            <p className="text-gray-300 text-sm">Hockey</p>
-            <p className="text-gray-300 text-sm">Table_tennis</p>
+            <p className="mt-3 text-gray-300 text-sm">Epl</p>
+            <p className="text-gray-300 text-sm">Laliga</p>
+            <p className="text-gray-300 text-sm">Bundesliga</p>
+            <p className="text-gray-300 text-sm">Serie A</p>
+            <p className="text-gray-300 text-sm">Ligue 1</p>
           </div>
         </div>
         <div className="mt-8">
