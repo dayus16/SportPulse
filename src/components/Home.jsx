@@ -147,7 +147,7 @@ const Home = ({ input }) => {
                 <img
                   src={post.fields.image.fields.file.url}
                   alt={post.fields.title}
-                  className="object-cover w-full h-48 rounded-lg"
+                  className="object-cover w-full h-60 rounded-lg"
                 />
               </div>
 
