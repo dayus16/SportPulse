@@ -119,7 +119,7 @@ const Home = ({ input }) => {
             </div>
 
             <div className="">
-              <button className="bg-[#e93314] text-white py-1 px-4 text-xs md:text-sm cursor-pointer">
+              <button className="bg-[#e93314] border border-gray-400 text-white py-1 px-4 text-xs md:text-sm cursor-pointer">
                 Epl
               </button>
               <button className="border border-gray-400 py-1 px-4 text-xs md:text-sm cursor-pointer">
@@ -138,20 +138,22 @@ const Home = ({ input }) => {
           </div>
 
           {/* Bottom: News Cards */}
-          {filteredItems.slice(0, 5).map((post) => (
+          {filteredItems.slice(0, 7).map((post) => (
             <div
               key={post.sys.id}
               className="flex flex-col md:flex-row gap-6 mt-10"
             >
-              <div className="w-full overflow-hidden rounded-lg">
+              {/* Image container with fixed width */}
+              <div className="w-full md:w-100 h-60 overflow-hidden rounded-lg flex-shrink-0">
                 <img
                   src={post.fields.image.fields.file.url}
                   alt={post.fields.title}
-                  className="object-cover w-full h-60 rounded-lg"
+                  className="object-cover w-full h-full rounded-lg"
                 />
               </div>
 
-              <div>
+              {/* Text content */}
+              <div className="flex-1">
                 <button className="bg-[#e93314] py-1 px-4 text-xs text-white font-bold">
                   {post.fields.category}
                 </button>
@@ -178,7 +180,7 @@ const Home = ({ input }) => {
                   <div className="flex items-center gap-2">
                     <img
                       src={Placeholder}
-                      alt=""
+                      alt="Placeholder"
                       className="w-10 h-10 rounded-full"
                     />
                     <p className="text-xs font-bold text-gray-800 uppercase">
@@ -220,11 +222,11 @@ const Home = ({ input }) => {
             .slice(0, 5)
             .map((post) => (
               <div key={post.sys.id} className="flex items-center mt-10 gap-3">
-                <div className="w-full overflow-hidden rounded-lg object-cover">
+                <div className="w-full md:w-30 h-20 flex-shrink-0 overflow-hidden rounded-lg object-cover">
                   <img
                     src={post.fields.image.fields.file.url}
                     alt={post.fields.title}
-                    className="w-30 h-20 rounded-lg object-cover"
+                    className="w-full h-full rounded-lg object-cover"
                   />
                 </div>
                 <div>
