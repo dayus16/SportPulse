@@ -222,11 +222,11 @@ const Home = ({ input }) => {
             .slice(0, 5)
             .map((post) => (
               <div key={post.sys.id} className="flex items-center mt-10 gap-3">
-                <div className="w-full md:w-30 h-20 flex-shrink-0 overflow-hidden rounded-lg object-cover">
+                <div className="w-32 h-20 flex-shrink-0 overflow-hidden rounded-lg">
                   <img
                     src={post.fields.image.fields.file.url}
                     alt={post.fields.title}
-                    className="w-full h-full rounded-lg object-cover"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                 </div>
                 <div>
