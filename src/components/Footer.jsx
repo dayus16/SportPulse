@@ -33,8 +33,8 @@ const Footer = () => {
     }
   };
   return (
-    <div className="mt-10 bg-gray-800 text-white">
-      <div className="flex flex-col md:flex-row justify-around space-y-3 max-w-screen-xl mx-auto">
+    <div className="mt-10 bg-gray-800 text-white ">
+      <div className="flex flex-col md:flex-row justify-around space-y-3 max-w-screen-xl mx-auto p-5">
         <div className="mt-8">
           <div className="flex items-center gap-3">
             <img
