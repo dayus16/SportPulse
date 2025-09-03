@@ -62,10 +62,10 @@ const Blog = () => {
   const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
   return (
-    <div className="bg-gray-100 min-h-screen p-5">
-      <h1 className="text-4xl font-bold p-5">Blogs</h1>
+    <div className="bg-gray-100 min-h-screen max-w-screen-xl mx-auto p-5">
+      <h1 className="text-4xl text-gray-800 font-bold p-5">Blogs</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 space-y-3 p-5">
         {currentPosts.length > 0 ? (
           currentPosts.map((post) => (
             <div key={post.sys.id} className="relative">

@@ -14,9 +14,9 @@ const Nav = ({ input, setInput }) => {
   };
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 z-50 bg-white shadow-lg">
       <div className="hidden md:block">
-        <div className="flex justify-between items-center p-5 bg-white text-black shadow-lg">
+        <div className="flex justify-between items-center p-5 text-black max-w-screen-xl mx-auto">
           <div className="text-2xl font-bold flex items-center space-x-2">
             <img
               src={Logo}

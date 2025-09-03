@@ -37,7 +37,7 @@ const Contacts = () => {
     }
   };
   return (
-    <div className="p-5">
+    <div className="p-5 max-w-screen-xl mx-auto">
       <div className="mt-10">
         <h1 className="text-3xl font-bold text-gray-800">Contact Us</h1>
         <p className="mt-5 text-sm text-gray-700">

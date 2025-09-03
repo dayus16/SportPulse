@@ -75,7 +75,7 @@ const Home = ({ input }) => {
   };
 
   return (
-    <div className="text-black p-5">
+    <div className="text-black max-w-screen-xl mx-auto p-5">
       <div className="flex items-center justify-around h-100 rounded-lg p-5 bg-[#252423] text-white">
         <div>
           <h1 className="md:text-4xl text-3xl font-bold">
