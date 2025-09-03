@@ -88,7 +88,7 @@ const Nav = ({ input, setInput }) => {
 
         {/* Search bar toggle */}
         {inputField && (
-          <div className="flex items-center px-5 pb-3 space-x-2 relative">
+          <div className="flex items-center px-5 py-3 pb-3 space-x-2 relative">
             <input
               type="text"
               placeholder="Search..."
@@ -96,7 +96,7 @@ const Nav = ({ input, setInput }) => {
               onChange={(e) => setInput(e.target.value)}
               className="flex-1 py-2 px-3 rounded border border-black outline-none"
             />
-            <button className="cursor-pointer px-4 py-2 rounded absolute right-6 top-0">
+            <button className="cursor-pointer p-5 rounded absolute right-6 top-0">
               <IoIosSearch size={25} />
             </button>
           </div>
