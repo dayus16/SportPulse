@@ -16,7 +16,7 @@ const managementClient = createManagementClient({
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 8;
+  const postsPerPage = 9;
 
   const getAllEntries = async () => {
     try {
@@ -109,7 +109,7 @@ const Blog = () => {
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => prev - 1)}
-            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 cursor-pointer"
           >
             <FiChevronLeft size={20} />
           </button>
@@ -119,7 +119,7 @@ const Blog = () => {
           <button
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50"
+            className="px-4 py-2 bg-gray-300 rounded disabled:opacity-50 cursor-pointer"
           >
             <FiChevronRight size={20} />
           </button>

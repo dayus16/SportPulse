@@ -14,7 +14,6 @@ const client = createClient({
   accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
 });
 
-
 const managementClient = createManagementClient({
   accessToken: import.meta.env.VITE_CONTENTFUL_MANAGEMENT_TOKEN,
 });
@@ -137,7 +136,7 @@ const BlogDetails = () => {
   };
 
   return (
-    <div className="mt-10 w-full md:w-[70%]">
+    <div className="mt-10  max-w-screen-xl mx-auto">
       <div className="p-8">
         {blogPost ? (
           <>
@@ -203,8 +202,13 @@ const BlogDetails = () => {
             <Adbanner />
 
             {/* Content */}
-            <div className="mt-6 text-lg text-gray-800">
-              {blogPost.fields.postContent}
+            <div className="mt-6 text-lg text-gray-800 space-y-4 leading-relaxed">
+              {blogPost.fields.postContent
+                .split("\n")
+                .filter((para) => para.trim() !== "")
+                .map((para, index) => (
+                  <p key={index}>{para}</p>
+                ))}
             </div>
 
             {/* Comment Form */}
