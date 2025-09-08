@@ -13,10 +13,19 @@ const managementClient = createManagementClient({
   accessToken: import.meta.env.VITE_CONTENTFUL_MANAGEMENT_TOKEN,
 });
 
-const Blog = () => {
+const Blog = ({ input }) => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 9;
+
+  const normalizedInput = input.trim().toLowerCase();
+
+  const filteredItems = blogPosts.filter(
+    (post) =>
+      post.fields.title.toLowerCase().includes(normalizedInput) ||
+      post.fields.category.toLowerCase().includes(normalizedInput) ||
+      post.fields.author.toLowerCase().includes(normalizedInput)
+  );
 
   const getAllEntries = async () => {
     try {
@@ -58,7 +67,7 @@ const Blog = () => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = blogPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filteredItems.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(blogPosts.length / postsPerPage);
 
   return (

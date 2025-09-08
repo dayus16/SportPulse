@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/contact" element={<Contacts />} />
           <Route path="/about" element={<About />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog" element={<Blog input={input} setInput={setInput}/>} />
           <Route path="/blogDetails/:id" element={<BlogDetails />} />
         </Routes>
         <Footer />
