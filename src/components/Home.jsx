@@ -5,7 +5,6 @@ import { FaRegComments, FaLongArrowAltRight, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 import { createClient } from "contentful";
-import Adbanner from "./Adbanner.jsx";
 import { createClient as createManagementClient } from "contentful-management";
 
 const client = createClient({
@@ -263,7 +262,6 @@ const Home = ({ input }) => {
                 </div>
               </div>
             ))}
-          <Adbanner />
           <div className="mt-8">
             <h2 className="text-gray-800 text-xl font-bold rounded border-b border-gray-400 pb-2">
               Popular Tags

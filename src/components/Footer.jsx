@@ -3,6 +3,7 @@ import Logo from "../Images/Logo001.jpg";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import ClipLoader from "react-spinners/ClipLoader";
+import Adbanner from "./Adbanner";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -119,6 +120,9 @@ const Footer = () => {
         <p className="text-lg text-gray-300 pb-5">
           © 2025 SportPulse. All rights reserved.
         </p>
+      </div>
+      <div className="flex justify-center space-x-4 pb-2">
+        <Adbanner />
       </div>
     </div>
   );
