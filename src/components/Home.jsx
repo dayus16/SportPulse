@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { ReactTyped } from "react-typed";
 import { createClient } from "contentful";
 import { createClient as createManagementClient } from "contentful-management";
-import Adbanner from "./Adbanner";
+
 
 const client = createClient({
   space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
@@ -263,7 +263,6 @@ const Home = ({ input }) => {
                 </div>
               </div>
             ))}
-          <Adbanner />
           <div className="mt-8">
             <h2 className="text-gray-800 text-xl font-bold rounded border-b border-gray-400 pb-2">
               Popular Tags

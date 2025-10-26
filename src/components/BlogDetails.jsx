@@ -5,7 +5,6 @@ import Background from "../Images/Home_Pix.jpg";
 import { createClient } from "contentful";
 import { useParams } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-import Adbanner from "./Adbanner.jsx";
 import { createClient as createManagementClient } from "contentful-management";
 
 // Contentful client
@@ -198,8 +197,6 @@ const BlogDetails = () => {
                 className="rounded-lg w-full h-120 object-cover"
               />
             </div>
-
-            <Adbanner />
 
             {/* Content */}
             <div className="mt-6 text-lg text-gray-800 space-y-4 leading-relaxed">
